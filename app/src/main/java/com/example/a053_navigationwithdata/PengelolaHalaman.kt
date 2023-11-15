@@ -27,7 +27,8 @@ import com.example.a053_navigationwithdata.data.SumberData.flavors
 enum class PengelolaHalaman {
     Home,
     Rasa,
-    Summary
+    Summary,
+    Formulir
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +77,7 @@ fun EsJumboApp(
         ) {
             composable(route = PengelolaHalaman.Home.name) {
                 HalamanHome(onNextButtonClicked = {
-                    navController.navigate(PengelolaHalaman.Rasa.name)
+                    navController.navigate(PengelolaHalaman.Formulir.name)
                 }
                 )
             }
@@ -99,6 +100,13 @@ fun EsJumboApp(
                     orderUiState = uiState,
                     onCancelButtonClicked = { cancelOrderAndNavigateToRasa(navController) })
             }
+            composable(route = PengelolaHalaman.Formulir.name){
+                HalamanTiga(onSubmitClicked = {
+                    viewModel.setContact(it)
+                    navController.navigate(PengelolaHalaman.Formulir.name)
+                },onCancelButtonClicked = {navController.navigate(PengelolaHalaman.Home.name)
+                })
+            }
         }
     }
 }
@@ -108,7 +116,7 @@ private fun cancelOrderAndNavigateToHome(
     navController: NavHostController
 ) {
     viewModel.resetOrder()
-    navController.popBackStack(PengelolaHalaman.Home.name, inclusive = false)
+    navController.popBackStack(PengelolaHalaman.Formulir.name, inclusive = false)
 }
 
 private fun cancelOrderAndNavigateToRasa(
