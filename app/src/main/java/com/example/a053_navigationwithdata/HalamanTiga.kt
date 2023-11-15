@@ -69,7 +69,8 @@ fun HalamanTiga(
             Button(onClick = onCancelButtonClicked) {
                 Text(stringResource(id = R.string.btn_back))
             }
-            Button(onClick = { onSubmitClicked(listData) }) {
+            Button(onClick = { onSubmitClicked(listData) }
+                ,enabled = nama.isNotEmpty()) {
                 Text(stringResource(id = R.string.btn_submit))
             }
         }
